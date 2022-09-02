@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package user_protobuf;
+
+option go_package = "example.com/grpc_jwt_crud_api";
+
+service UserServices {
+  rpc FetchUser (FetchUserRequest) returns (FetchUserReply) {}
+  rpc CreateUser (CreateUserRequest) returns (CreateUserReply) {}
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply) {}
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply) {}
+}
+
+message User {
+  int32 uid = 1;
+  string name = 2;
+  string nationality = 3;
+  int32 zip = 4;
+}
+
+message FetchUserRequest {
+  int32 uid = 1;
+}
+
+message FetchUserReply {
+  User user = 1;
+}
+
+message CreateUserRequest {
+  User user = 1;
+}
+
+message CreateUserReply {
+  User user = 1;
+}
+
+message UpdateUserRequest {
+  User user = 1;
+}
+
+message UpdateUserReply {
+  User user = 1;
+}
+
+message DeleteUserRequest {
+  int32 uid = 1;
+}
+
+message DeleteUserReply {
+  User user = 1;
+}
