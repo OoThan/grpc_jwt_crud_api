@@ -22,10 +22,10 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServicesClient interface {
-	FetchUser(ctx context.Context, in *FetchUserRequest, opts ...grpc.CallOption) (*FetchUserReply, error)
-	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserReply, error)
-	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error)
-	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserReply, error)
+	FetchUser(ctx context.Context, in *FetchUserRequest, opts ...grpc.CallOption) (*FetchUserResponse, error)
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 }
 
 type userServicesClient struct {
@@ -36,8 +36,8 @@ func NewUserServicesClient(cc grpc.ClientConnInterface) UserServicesClient {
 	return &userServicesClient{cc}
 }
 
-func (c *userServicesClient) FetchUser(ctx context.Context, in *FetchUserRequest, opts ...grpc.CallOption) (*FetchUserReply, error) {
-	out := new(FetchUserReply)
+func (c *userServicesClient) FetchUser(ctx context.Context, in *FetchUserRequest, opts ...grpc.CallOption) (*FetchUserResponse, error) {
+	out := new(FetchUserResponse)
 	err := c.cc.Invoke(ctx, "/user_protobuf.UserServices/FetchUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -45,8 +45,8 @@ func (c *userServicesClient) FetchUser(ctx context.Context, in *FetchUserRequest
 	return out, nil
 }
 
-func (c *userServicesClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserReply, error) {
-	out := new(CreateUserReply)
+func (c *userServicesClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+	out := new(CreateUserResponse)
 	err := c.cc.Invoke(ctx, "/user_protobuf.UserServices/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -54,8 +54,8 @@ func (c *userServicesClient) CreateUser(ctx context.Context, in *CreateUserReque
 	return out, nil
 }
 
-func (c *userServicesClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserReply, error) {
-	out := new(UpdateUserReply)
+func (c *userServicesClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, "/user_protobuf.UserServices/UpdateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func (c *userServicesClient) UpdateUser(ctx context.Context, in *UpdateUserReque
 	return out, nil
 }
 
-func (c *userServicesClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserReply, error) {
-	out := new(DeleteUserReply)
+func (c *userServicesClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
+	out := new(DeleteUserResponse)
 	err := c.cc.Invoke(ctx, "/user_protobuf.UserServices/DeleteUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -76,10 +76,10 @@ func (c *userServicesClient) DeleteUser(ctx context.Context, in *DeleteUserReque
 // All implementations must embed UnimplementedUserServicesServer
 // for forward compatibility
 type UserServicesServer interface {
-	FetchUser(context.Context, *FetchUserRequest) (*FetchUserReply, error)
-	CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error)
-	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error)
-	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserReply, error)
+	FetchUser(context.Context, *FetchUserRequest) (*FetchUserResponse, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	mustEmbedUnimplementedUserServicesServer()
 }
 
@@ -87,16 +87,16 @@ type UserServicesServer interface {
 type UnimplementedUserServicesServer struct {
 }
 
-func (UnimplementedUserServicesServer) FetchUser(context.Context, *FetchUserRequest) (*FetchUserReply, error) {
+func (UnimplementedUserServicesServer) FetchUser(context.Context, *FetchUserRequest) (*FetchUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FetchUser not implemented")
 }
-func (UnimplementedUserServicesServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserReply, error) {
+func (UnimplementedUserServicesServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
-func (UnimplementedUserServicesServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserReply, error) {
+func (UnimplementedUserServicesServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
 }
-func (UnimplementedUserServicesServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserReply, error) {
+func (UnimplementedUserServicesServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
 }
 func (UnimplementedUserServicesServer) mustEmbedUnimplementedUserServicesServer() {}

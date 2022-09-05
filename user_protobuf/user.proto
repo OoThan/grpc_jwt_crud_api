@@ -5,10 +5,10 @@ package user_protobuf;
 option go_package = "example.com/grpc_jwt_crud_api";
 
 service UserServices {
-  rpc FetchUser (FetchUserRequest) returns (FetchUserReply) {}
-  rpc CreateUser (CreateUserRequest) returns (CreateUserReply) {}
-  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserReply) {}
-  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserReply) {}
+  rpc FetchUser (FetchUserRequest) returns (FetchUserResponse) {}
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse) {}
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {}
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse) {}
 }
 
 message User {
@@ -22,7 +22,7 @@ message FetchUserRequest {
   int32 uid = 1;
 }
 
-message FetchUserReply {
+message FetchUserResponse {
   User user = 1;
 }
 
@@ -30,7 +30,7 @@ message CreateUserRequest {
   User user = 1;
 }
 
-message CreateUserReply {
+message CreateUserResponse {
   User user = 1;
 }
 
@@ -38,7 +38,7 @@ message UpdateUserRequest {
   User user = 1;
 }
 
-message UpdateUserReply {
+message UpdateUserResponse {
   User user = 1;
 }
 
@@ -46,6 +46,6 @@ message DeleteUserRequest {
   int32 uid = 1;
 }
 
-message DeleteUserReply {
-  User user = 1;
+message DeleteUserResponse {
+  int32 uid = 1;
 }
